@@ -20,12 +20,15 @@ User Story:
     Clicking Squares that touch no bombs are blanks, and will change color
 
  -MVP
-     -beginner size grid (9x9) with 10 mines
+    Completed
+     -beginner size grid (9x9) with 10 mines 
      -square on click is empty, a mine, or   contains the number of mines the square touches
+    Incomplete
      -squares with mines end game
      - reset button
 
  Stretch features:    
+   Incomplete
     -Three grid sizes/levels to choose between
     -beginner size grid (9x9) with 10 mines
     -intermediate size grid (16x16) with 40 mines
@@ -35,44 +38,5 @@ User Story:
     -as squares are reveled form a picture
     -top score logger
     -set possible bomb squares to flags
+    -make it pretty
 
-Pseudocode
-// *** means ideas to work on/improve if I have time
-//global variables
-let squareCount = 0;
-let squareFill = 0
-let bombArray = []
-let squares = squares in grid
-let grid = compsit of whoe grid
-let message = a heading in the HTML
-
-//create grid array to store gameMap(bombs, numbers, blanks, and game state)
-let gameMap = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,]
-
-//***might try to create a grid map all in js starting with an empty array if I have time
-
-//add number to each square as an id
-
-
-
-//add setGame function that:
-    //adds bombs to random squares function
-    //randomly picks 10 bomb squares
-    //assign bombs to gameMap squares 
-
-
-//add onclick to quares
-
-
-//add explode function shows bomb, changes all squares to red, has a message saying the bomb exploded
-
-
-
-
-//add safe function to change colors of safe squares on click
-
-//add bombTouch function to look at squares in front of and behid (i+1, i-1) and squares in rows above and below i+-[9,8,7] and add the number of bombs touching to the square
-
-//add win function wher only bomb squares are still unclicked
-
-//add reset button to clear the board and reset ids

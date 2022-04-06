@@ -7,14 +7,18 @@ h2 {
 }
 
 button {
+    font-size: smaller;
+    vertical-align: center;
     border: 1px solid black;
     background-color: gray;
-    width: 10px;
-    padding: 10px;
-    margin: 5px;
+    width: 30px;
+    height: 30px;
+    padding: 30px; 
+    /* margin: 5px; */
     display: flex;
     flex-direction: row;
     justify-content: right;
+    overflow: hidden;
 }
 .whole {
     padding: 2% 2% 2% 2%;

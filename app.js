@@ -7,7 +7,7 @@ let bombArray = []
 let squares = document.querySelectorAll(".square")
 let grid = document.getElementById("gridID")
 let message = document.querySelector(".message")
-console.log(message)
+
 
 //create grid array to store gameMap(bombs, numbers, blanks, and game state)
 // let gameMap = [[[],[],[],[],[],[],[],[],[]],[[],[],[],[],[],[],[],[],[]],[[],[],[],[],[],[],[],[],[]],[[],[],[],[],[],[],[],[],[]],[[],[],[],[],[],[],[],[],[]],[[],[],[],[],[],[],[],[],[]],[[],[],[],[],[],[],[],[],[]],[[],[],[],[],[],[],[],[],[]],[[],[],[],[],[],[],[],[],[]]]
@@ -22,6 +22,7 @@ let gameMap = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 //add number to squares
 squares.forEach(square => {
     square.dataset.number = squareCount
+    gameMap[squareCount] = squareCount
     squareCount++
 });
 
@@ -50,35 +51,87 @@ function setGame() {
 squares.forEach(square => {
     square.addEventListener('click', () => {
         if (square.id === "bomb") {
-            console.log(square.id)
-            explodeBomb(square.id)
+            //console.log(gameMap[square.dataset.number])
+            explodeBomb(gameMap[square.dataset.number])
         } else {
+            countBombs(gameMap[square.dataset.number])
             console.log("safe")
-            safe(square.id)
+            //console.log(gameMap[square.dataset.number])
+            safe(gameMap[square.dataset.number])
         }
     })
 })
 
 //add explode function
 //https://cdn.vectorstock.com/i/1000x1000/19/14/bomb-vector-15001914.webp
-function explodeBomb(squareID){
+function explodeBomb(squareNo) {
     message.innerHTML = "You found the bomb - with your face.  Better luck next time"
-    
+
+
 }
 
 //add countBombs function
-// look at squares in front of and behid (i+1, i-1) and squares in rows above [] and below[-9-8-7] and below [+8+9+7]
+// look at squares in front of and behid (i+1, i-1) and squares in rows above [] and below[-9-8-10] and below [+8+9+10]
+function countBombs(squareNo) {
+    let base = squareNo
+    let bombTouchCount = 0
+    let edgeCaseTop = [0,1,2,3,4,5,6,7,8]
+    let edgeCaseLeft = [9,18,27,36,45,54,63,72]
+    let edgeCaseBottom = [73,74,75,76,77,78,79,80]
+    let edgeCaseRight = []
+    let ecTL = 
+    let ecTR = 
+    let ecBL = 
+    let ecBR = 
+    //edge piece exceptions
+    for(let i = 0; )
 
-//add safe function
-function checkSafe(squareID){
+    //regular piece calculations
+ 
+        if (gameMap[base - 1] === "bomb") {
+            bombTouchCount++
+            console.log(`touch count = ${bombTouchCount}`)
+        }
+        if (gameMap[base + 1] === "bomb") {
+            bombTouchCount++
+            console.log(`touch count = ${bombTouchCount}`)
+        }
+        if (gameMap[base + 10] === "bomb") {
+            bombTouchCount++
+            console.log(`touch count = ${bombTouchCount}`)
+        }
+        if (gameMap[base + 8] === "bomb") {
+            bombTouchCount++
+            console.log(`touch count = ${bombTouchCount}`)
+        }
+        if (gameMap[base + 9] === "bomb") {
+            bombTouchCount++
+            console.log(`touch count = ${bombTouchCount}`)
+        }
+        if (gameMap[base - 10] === "bomb") {
+            bombTouchCount++
+            console.log(`touch count = ${bombTouchCount}`)
+        }
+        if (gameMap[base - 8] === "bomb") {
+            bombTouchCount++
+            console.log(`touch count = ${bombTouchCount}`)
+        }
+        if (gameMap[base - 9] === "bomb") {
+            bombTouchCount++
+            console.log(`touch count = ${bombTouchCount}`)
+        }
+        if (bombTouchCount != 0) {
+            squares[squareNo].style.color = "red"
+            squares[squareNo].innerHTML = bombTouchCount
+        }
+    }
 
+
+function safe(squareNo) {
+    squares[squareNo].style.backgroundColor = "green"
 }
 
-function safe(){
-
-}
-
-function bombTouch(){
+function bombTouch() {
 
 }
 
@@ -87,7 +140,7 @@ function bombTouch(){
 //add win function
 
 //add reset button
-function clearBoard(){
+function clearBoard() {
     //refresh IDs
     squares.forEach(square => {
         square.id = 0
