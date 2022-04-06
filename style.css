@@ -1,0 +1,14 @@
+/* .table{
+    width: 80%;
+    margin: 20px auto;
+    border: black solid
+  } */
+  
+  button{
+    border: 1px solid black;
+    display: inline-block;
+    width: 500px;
+    padding: 200px;
+    margin: 200px;
+  }
+  
