@@ -51,25 +51,26 @@ squares.forEach(square => {
     square.addEventListener('click', () => {
         if (square.id === "bomb") {
             console.log(square.id)
-            explodeBomb()
+            explodeBomb(square.id)
         } else {
             console.log("safe")
-            safe()
+            safe(square.id)
         }
     })
 })
 
 //add explode function
 //https://cdn.vectorstock.com/i/1000x1000/19/14/bomb-vector-15001914.webp
-function explodeBomb(){
+function explodeBomb(squareID){
     message.innerHTML = "You found the bomb - with your face.  Better luck next time"
+    
 }
 
 //add countBombs function
 // look at squares in front of and behid (i+1, i-1) and squares in rows above [] and below[-9-8-7] and below [+8+9+7]
 
 //add safe function
-function checkSafe(){
+function checkSafe(squareID){
 
 }
 
