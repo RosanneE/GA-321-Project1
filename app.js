@@ -6,6 +6,8 @@ let squareFill = 0
 let bombArray = []
 let squares = document.querySelectorAll(".square")
 let grid = document.getElementById("gridID")
+let message = document.querySelector(".message")
+console.log(message)
 
 //create grid array to store gameMap(bombs, numbers, blanks, and game state)
 // let gameMap = [[[],[],[],[],[],[],[],[],[]],[[],[],[],[],[],[],[],[],[]],[[],[],[],[],[],[],[],[],[]],[[],[],[],[],[],[],[],[],[]],[[],[],[],[],[],[],[],[],[]],[[],[],[],[],[],[],[],[],[]],[[],[],[],[],[],[],[],[],[]],[[],[],[],[],[],[],[],[],[]],[[],[],[],[],[],[],[],[],[]]]
@@ -22,9 +24,12 @@ squares.forEach(square => {
     square.dataset.number = squareCount
     squareCount++
 });
+
 setGame()
 //add setGame function
 function setGame() {
+    clearBoard()
+    //add bombs to random squares function
     //randomly pick 10 bomb squares
     for (let i = 0; i < 10; i++) {
         let bombCreate = Math.floor(Math.random() * 81)
@@ -32,9 +37,9 @@ function setGame() {
         Math.floor(Math.random() * 81)
     }
     Math.floor(Math.random() * 81)
-    //assign bombs to gameMap squares
-    for(i = 0; i<10; i++){
-        gameMap[bombArray[i]] ="bomb"
+    //assign bombs to gameMap squares 
+    for (i = 0; i < 10; i++) {
+        gameMap[bombArray[i]] = "bomb"
         squares[bombArray[i]].id = "bomb"
     }
     console.log(gameMap)
@@ -46,25 +51,51 @@ squares.forEach(square => {
     square.addEventListener('click', () => {
         if (square.id === "bomb") {
             console.log(square.id)
+            explodeBomb()
         } else {
             console.log("safe")
+            safe()
         }
     })
-});
+})
 
 //add explode function
+//https://cdn.vectorstock.com/i/1000x1000/19/14/bomb-vector-15001914.webp
+function explodeBomb(){
+    message.innerHTML = "You found the bomb - with your face.  Better luck next time"
+}
 
 //add countBombs function
+// look at squares in front of and behid (i+1, i-1) and squares in rows above [] and below[-9-8-7] and below [+8+9+7]
 
-//add empty function
+//add safe function
+function checkSafe(){
+
+}
+
+function safe(){
+
+}
+
+function bombTouch(){
+
+}
 
 //add endGame function
 
 //add win function
 
 //add reset button
+function clearBoard(){
+    //refresh IDs
+    squares.forEach(square => {
+        square.id = 0
+    })
+    //remove images
+    //reset css colors
+}
 
-//add bombs to random squares function
+
 
 // -MVP
 // -beginner size grid (9x9) with 10 mines - Is starter template

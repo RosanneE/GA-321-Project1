@@ -2,6 +2,10 @@
 h1{
     text-align: center;
 }
+h2 {
+    text-align: center;
+}
+
 button {
     border: 1px solid black;
     background-color: gray;
