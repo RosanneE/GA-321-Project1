@@ -8,13 +8,9 @@ let squares = document.querySelectorAll(".square")
 let grid = document.getElementById("gridID")
 let message = document.querySelector(".message")
 
-
-//create grid array to store gameMap(bombs, numbers, blanks, and game state)
-// let gameMap = [[[],[],[],[],[],[],[],[],[]],[[],[],[],[],[],[],[],[],[]],[[],[],[],[],[],[],[],[],[]],[[],[],[],[],[],[],[],[],[]],[[],[],[],[],[],[],[],[],[]],[[],[],[],[],[],[],[],[],[]],[[],[],[],[],[],[],[],[],[]],[[],[],[],[],[],[],[],[],[]],[[],[],[],[],[],[],[],[],[]]]
-// let gameMap = [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
 let gameMap = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,]
 
-//***might try to create a grid map all in js starting with an empty array if I have time
+//***Might not need?  Or might try to create a grid map all in js starting with an empty array if I have time
 //letGameMapTwo = []
 
 
@@ -35,8 +31,8 @@ function setGame() {
     for (let i = 0; i < 10; i++) {
         let bombCreate = Math.floor(Math.random() * 81)
         bombArray.push(bombCreate)
-        Math.floor(Math.random() * 81)
     }
+    console.log(`bomb array ' ${bombArray}`)
     Math.floor(Math.random() * 81)
     //assign bombs to gameMap squares 
     for (i = 0; i < 10; i++) {
@@ -51,12 +47,10 @@ function setGame() {
 squares.forEach(square => {
     square.addEventListener('click', () => {
         if (square.id === "bomb") {
-            //console.log(gameMap[square.dataset.number])
+
             explodeBomb(gameMap[square.dataset.number])
         } else {
             countBombs(gameMap[square.dataset.number])
-            console.log("safe")
-            //console.log(gameMap[square.dataset.number])
             safe(gameMap[square.dataset.number])
         }
     })
@@ -75,60 +69,59 @@ function explodeBomb(squareNo) {
 function countBombs(squareNo) {
     let base = squareNo
     let bombTouchCount = 0
-    let edgeCaseTop = [0,1,2,3,4,5,6,7,8]
-    let edgeCaseLeft = [9,18,27,36,45,54,63,72]
-    let edgeCaseBottom = [73,74,75,76,77,78,79,80]
-    let edgeCaseRight = []
-    let ecTL = 
-    let ecTR = 
-    let ecBL = 
-    let ecBR = 
-    //edge piece exceptions
-    for(let i = 0; )
+    //edgecase groups
+    let edgeCaseLeft = [0, 9, 18, 27, 36, 45, 54, 63, 72,]
+    let edgeCaseRight = [8, 17, 26, 35, 44, 53, 62, 71, 80]
 
+    //edge piece exception code - return if hit, don't progress to regular
+
+    edgeCaseLeft.forEach(caseLeft => {
+        if (caseLeft === squareNo) {
+            edgeRight(squareNo, bombTouchCount,base)
+            return
+        }
+    })
+    edgeCaseLeft.forEach(caseLeft => {
+        if (caseLeft === squareNo) {
+            edgeLeft(squareNo, bombTouchCount,base)
+            return
+        }
+    })
     //regular piece calculations
- 
-        if (gameMap[base - 1] === "bomb") {
-            bombTouchCount++
-            console.log(`touch count = ${bombTouchCount}`)
-        }
-        if (gameMap[base + 1] === "bomb") {
-            bombTouchCount++
-            console.log(`touch count = ${bombTouchCount}`)
-        }
-        if (gameMap[base + 10] === "bomb") {
-            bombTouchCount++
-            console.log(`touch count = ${bombTouchCount}`)
-        }
-        if (gameMap[base + 8] === "bomb") {
-            bombTouchCount++
-            console.log(`touch count = ${bombTouchCount}`)
-        }
-        if (gameMap[base + 9] === "bomb") {
-            bombTouchCount++
-            console.log(`touch count = ${bombTouchCount}`)
-        }
-        if (gameMap[base - 10] === "bomb") {
-            bombTouchCount++
-            console.log(`touch count = ${bombTouchCount}`)
-        }
-        if (gameMap[base - 8] === "bomb") {
-            bombTouchCount++
-            console.log(`touch count = ${bombTouchCount}`)
-        }
-        if (gameMap[base - 9] === "bomb") {
-            bombTouchCount++
-            console.log(`touch count = ${bombTouchCount}`)
-        }
-        if (bombTouchCount != 0) {
-            squares[squareNo].style.color = "red"
-            squares[squareNo].innerHTML = bombTouchCount
-        }
+    if (gameMap[base - 1] === "bomb") {
+        bombTouchCount++
     }
+    if (gameMap[base + 1] === "bomb") {
+        bombTouchCount++
+    }
+    if (gameMap[base + 10] === "bomb") {
+        bombTouchCount++
+    }
+    if (gameMap[base + 8] === "bomb") {
+        bombTouchCount++
+    }
+    if (gameMap[base + 9] === "bomb") {
+        bombTouchCount++
+    }
+    if (gameMap[base - 10] === "bomb") {
+        bombTouchCount++
+    }
+    if (gameMap[base - 8] === "bomb") {
+        bombTouchCount++
+    }
+    if (gameMap[base - 9] === "bomb") {
+        bombTouchCount++
+    }
+    if (bombTouchCount != 0) {
+        squares[squareNo].style.color = "purple"
+        squares[squareNo].innerHTML = bombTouchCount
+    }
+}
+
 
 
 function safe(squareNo) {
-    squares[squareNo].style.backgroundColor = "green"
+    squares[squareNo].style.backgroundColor = "lightgreen"
 }
 
 function bombTouch() {
@@ -149,6 +142,63 @@ function clearBoard() {
     //reset css colors
 }
 
+function edgeRight(squareNo, bombTouchCount,base){
+    if (gameMap[base + 1] === "bomb") {
+        bombTouchCount++
+    }
+    if (gameMap[base + 10] === "bomb") {
+        bombTouchCount++
+    }
+    if (gameMap[base + 8] === "bomb") {
+        bombTouchCount++
+    }
+    if (gameMap[base + 9] === "bomb") {
+        bombTouchCount++
+    }
+    if (gameMap[base - 10] === "bomb") {
+        bombTouchCount++
+    }
+    if (gameMap[base - 8] === "bomb") {
+        bombTouchCount++
+    }
+    if (gameMap[base - 9] === "bomb") {
+        bombTouchCount++
+    }
+    if (bombTouchCount != 0) {
+        squares[squareNo].style.color = "purple"
+        squares[squareNo].innerHTML = bombTouchCount
+    }
+    return bombTouchCount
+}
+
+function edgeLeft(squareNo, bombTouchCount,base){
+    if (gameMap[base - 1] === "bomb") {
+        bombTouchCount++
+    }
+    if (gameMap[base + 10] === "bomb") {
+        bombTouchCount++
+    }
+    if (gameMap[base + 8] === "bomb") {
+        bombTouchCount++
+    }
+    if (gameMap[base + 9] === "bomb") {
+        bombTouchCount++
+    }
+    if (gameMap[base - 10] === "bomb") {
+        bombTouchCount++
+    }
+    if (gameMap[base - 8] === "bomb") {
+        bombTouchCount++
+    }
+    if (gameMap[base - 9] === "bomb") {
+        bombTouchCount++
+    }
+    if (bombTouchCount != 0) {
+        squares[squareNo].style.color = "purple"
+        squares[squareNo].innerHTML = bombTouchCount
+    }
+    return bombTouchCount
+}
 
 
 // -MVP

@@ -24,8 +24,9 @@ User Story:
      -beginner size grid (9x9) with 10 mines 
      -square on click is empty, a mine, or   contains the number of mines the square touches
     Incomplete
+     -account for edge piece mine count differences
      -squares with mines end game
-     - reset button
+     -reset button
 
  Stretch features:    
    Incomplete
