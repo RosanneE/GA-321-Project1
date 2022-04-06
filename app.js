@@ -25,18 +25,19 @@ squares.forEach(square => {
 setGame()
 //add setGame function
 function setGame() {
-    //randomly assign ten bombs
-    
+    //randomly pick 10 bomb squares
     for (let i = 0; i < 10; i++) {
         let bombCreate = Math.floor(Math.random() * 81)
         bombArray.push(bombCreate)
-        console.log(bombArray)
+        Math.floor(Math.random() * 81)
     }
-
-    
-    for (let i = 0; i < gameMap.length; i++) {
-
+    Math.floor(Math.random() * 81)
+    //assign bombs to gameMap squares
+    for(i = 0; i<10; i++){
+        gameMap[bombArray[i]] ="bomb"
+        squares[bombArray[i]].id = "bomb"
     }
+    console.log(gameMap)
 }
 
 
