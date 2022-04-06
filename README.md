@@ -26,3 +26,6 @@ Goals:
             -advanced (30x16) with 99 mines
         -Time clock (starts on first click)
         -empty square explosion (clicking an empty square reveals all touching empty squares)
+        -as squares are reveled form a picture
+        -top score logger
+        -set possible bomb squares to flags
