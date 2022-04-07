@@ -1,8 +1,9 @@
 // *** means ideas to work on/improve if I have time
 
 //global variables
-let squareCount = 0;
+let squareCount = 0
 let squareFill = 0
+let isEdge = false
 let bombArray = []
 let squares = document.querySelectorAll(".square")
 let grid = document.getElementById("gridID")
@@ -74,47 +75,48 @@ function countBombs(squareNo) {
     let edgeCaseRight = [8, 17, 26, 35, 44, 53, 62, 71, 80]
 
     //edge piece exception code - return if hit, don't progress to regular
-
     edgeCaseLeft.forEach(caseLeft => {
         if (caseLeft === squareNo) {
-            edgeRight(squareNo, bombTouchCount,base)
+            edgeLeft(squareNo, bombTouchCount, base)
             return
         }
     })
-    edgeCaseLeft.forEach(caseLeft => {
-        if (caseLeft === squareNo) {
-            edgeLeft(squareNo, bombTouchCount,base)
+    edgeCaseRight.forEach(caseRight => {
+        if (caseRight === squareNo) {
+            edgeRight(squareNo, bombTouchCount, base)
             return
         }
     })
     //regular piece calculations
-    if (gameMap[base - 1] === "bomb") {
-        bombTouchCount++
-    }
-    if (gameMap[base + 1] === "bomb") {
-        bombTouchCount++
-    }
-    if (gameMap[base + 10] === "bomb") {
-        bombTouchCount++
-    }
-    if (gameMap[base + 8] === "bomb") {
-        bombTouchCount++
-    }
-    if (gameMap[base + 9] === "bomb") {
-        bombTouchCount++
-    }
-    if (gameMap[base - 10] === "bomb") {
-        bombTouchCount++
-    }
-    if (gameMap[base - 8] === "bomb") {
-        bombTouchCount++
-    }
-    if (gameMap[base - 9] === "bomb") {
-        bombTouchCount++
-    }
-    if (bombTouchCount != 0) {
-        squares[squareNo].style.color = "purple"
-        squares[squareNo].innerHTML = bombTouchCount
+    if (isEdge === false) {
+        if (gameMap[base - 1] === "bomb") {
+            bombTouchCount++
+        }
+        if (gameMap[base + 1] === "bomb") {
+            bombTouchCount++
+        }
+        if (gameMap[base + 10] === "bomb") {
+            bombTouchCount++
+        }
+        if (gameMap[base + 8] === "bomb") {
+            bombTouchCount++
+        }
+        if (gameMap[base + 9] === "bomb") {
+            bombTouchCount++
+        }
+        if (gameMap[base - 10] === "bomb") {
+            bombTouchCount++
+        }
+        if (gameMap[base - 8] === "bomb") {
+            bombTouchCount++
+        }
+        if (gameMap[base - 9] === "bomb") {
+            bombTouchCount++
+        }
+        if (bombTouchCount != 0) {
+            squares[squareNo].style.color = "purple"
+            squares[squareNo].innerHTML = bombTouchCount
+        }
     }
 }
 
@@ -141,64 +143,56 @@ function clearBoard() {
     //remove images
     //reset css colors
 }
+function edgeLeft(squareNo, bombTouchCount, base) {
 
-function edgeRight(squareNo, bombTouchCount,base){
+    if (gameMap[base - 9] === "bomb") {
+        bombTouchCount++
+    }
+    if (gameMap[base - 8] === "bomb") {
+        bombTouchCount++
+    }
     if (gameMap[base + 1] === "bomb") {
         bombTouchCount++
     }
-    if (gameMap[base + 10] === "bomb") {
-        bombTouchCount++
-    }
-    if (gameMap[base + 8] === "bomb") {
-        bombTouchCount++
-    }
     if (gameMap[base + 9] === "bomb") {
         bombTouchCount++
     }
-    if (gameMap[base - 10] === "bomb") {
-        bombTouchCount++
-    }
-    if (gameMap[base - 8] === "bomb") {
-        bombTouchCount++
-    }
-    if (gameMap[base - 9] === "bomb") {
+    if (gameMap[base + 10] === "bomb") {
         bombTouchCount++
     }
     if (bombTouchCount != 0) {
         squares[squareNo].style.color = "purple"
         squares[squareNo].innerHTML = bombTouchCount
     }
-    return bombTouchCount
+    isEdge = true
+    return
 }
 
-function edgeLeft(squareNo, bombTouchCount,base){
+function edgeRight(squareNo, bombTouchCount, base) {
+    if (gameMap[base - 10] === "bomb") {
+        bombTouchCount++
+    }
+    if (gameMap[base - 9] === "bomb") {
+        bombTouchCount++
+    }
     if (gameMap[base - 1] === "bomb") {
         bombTouchCount++
     }
-    if (gameMap[base + 10] === "bomb") {
-        bombTouchCount++
-    }
     if (gameMap[base + 8] === "bomb") {
         bombTouchCount++
     }
     if (gameMap[base + 9] === "bomb") {
         bombTouchCount++
     }
-    if (gameMap[base - 10] === "bomb") {
-        bombTouchCount++
-    }
-    if (gameMap[base - 8] === "bomb") {
-        bombTouchCount++
-    }
-    if (gameMap[base - 9] === "bomb") {
-        bombTouchCount++
-    }
     if (bombTouchCount != 0) {
         squares[squareNo].style.color = "purple"
         squares[squareNo].innerHTML = bombTouchCount
     }
-    return bombTouchCount
+    isEdge = true
+    return
 }
+
+
 
 
 // -MVP
