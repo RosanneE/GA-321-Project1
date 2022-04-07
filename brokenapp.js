@@ -14,7 +14,6 @@ let gameMap = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 
 setGame()
 
-
 //add number to squares for tracking
 squares.forEach(square => {
     square.dataset.number = squareCount

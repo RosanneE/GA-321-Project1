@@ -8,13 +8,10 @@ let bombArray = []
 let squares = document.querySelectorAll(".square")
 let grid = document.getElementById("gridID")
 let message = document.querySelector(".message")
-
+let messageTwo = document.querySelector(".messageTwo")
+let reset = document.querySelector(".reset")
+//***Might not need?
 let gameMap = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,]
-
-//***Might not need?  Or might try to create a grid map all in js starting with an empty array if I have time
-//letGameMapTwo = []
-
-
 
 //add number to squares
 squares.forEach(square => {
@@ -22,28 +19,6 @@ squares.forEach(square => {
     gameMap[squareCount] = squareCount
     squareCount++
 });
-
-setGame()
-//add setGame function
-function setGame() {
-    clearBoard()
-    //add bombs to random squares function
-    //randomly pick 10 bomb squares
-    for (let i = 0; i < 10; i++) {
-        let bombCreate = Math.floor(Math.random() * 81)
-        bombArray.push(bombCreate)
-    }
-    console.log(`bomb array ' ${bombArray}`)
-    Math.floor(Math.random() * 81)
-    //assign bombs to gameMap squares 
-    for (i = 0; i < 10; i++) {
-        gameMap[bombArray[i]] = "bomb"
-        squares[bombArray[i]].id = "bomb"
-    }
-    console.log(gameMap)
-}
-
-
 //add onclick to buttons
 squares.forEach(square => {
     square.addEventListener('click', () => {
@@ -56,6 +31,35 @@ squares.forEach(square => {
         }
     })
 })
+//reset button calls setGame
+reset.addEventListener("click", function() {
+    setGame()
+})
+
+setGame()
+
+//setGame sets up new game, calls clearBoard
+function setGame() {
+    //resets squares to start condition
+    clearBoard()
+    //add bombs to random squares function
+    //randomly pick 10 bomb squares
+    for (let i = 0; i < 10; i++) {
+        let bombCreate = Math.floor(Math.random() * 81)
+        bombArray.push(bombCreate)
+    }
+    console.log(`bomb array ' ${bombArray}`)
+  
+    //assign bombs to gameMap squares 
+    for (i = 0; i < 10; i++) {
+        gameMap[bombArray[i]] = "bomb"
+        squares[bombArray[i]].id = "bomb"
+    }
+    console.log(gameMap)
+}
+
+
+
 
 //add explode function
 //https://cdn.vectorstock.com/i/1000x1000/19/14/bomb-vector-15001914.webp
@@ -126,22 +130,29 @@ function safe(squareNo) {
     squares[squareNo].style.backgroundColor = "lightgreen"
 }
 
-function bombTouch() {
-
-}
 
 //add endGame function
 
 //add win function
 
 //add reset button
-function clearBoard() {
-    //refresh IDs
+function clearBoard() { 
     squares.forEach(square => {
+        //refresh IDs
         square.id = 0
+        //reset css colors
+        square.style.backgroundColor = "grey"
+        //remove innerHTML
+        square.innerHTML = ""
+        //remove messages
+        message.innerHTML = ""
+        messageTwo.innerHTML = ""
+
+
+
+
     })
-    //remove images
-    //reset css colors
+
 }
 function edgeLeft(squareNo, bombTouchCount, base) {
 
