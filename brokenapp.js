@@ -68,8 +68,7 @@ function countBombs(squareNo) {
 
     console.log(`inside of countBombs`)
 
-    //edge piece exception code - if it is an edgecase, it doesn't count the number before it(right) or after it (left). 
-    //calls edgeRight
+
     edgeCaseRight.forEach(caseRight => {
         if (caseRight === squareNo) {
             console.log(`inside of countBombs--edgeCaseRight`)

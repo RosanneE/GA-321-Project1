@@ -10,7 +10,7 @@ let grid = document.getElementById("gridID")
 let message = document.querySelector(".message")
 let messageTwo = document.querySelector(".messageTwo")
 let reset = document.querySelector(".reset")
-//***Might not need?
+//***Might not need? Only for Debugging?
 let gameMap = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,]
 
 //add number to squares
@@ -48,13 +48,13 @@ function setGame() {
         let bombCreate = Math.floor(Math.random() * 81)
         bombArray.push(bombCreate)
     }
-    console.log(`bomb array ' ${bombArray}`)
-  
     //assign bombs to gameMap squares 
     for (i = 0; i < 10; i++) {
         gameMap[bombArray[i]] = "bomb"
         squares[bombArray[i]].id = "bomb"
     }
+    //log bomb array and gameMap for debugging
+    console.log(`bomb array ' ${bombArray}`)
     console.log(gameMap)
 }
 
@@ -62,36 +62,33 @@ function setGame() {
 
 
 //add explode function
-//https://cdn.vectorstock.com/i/1000x1000/19/14/bomb-vector-15001914.webp
 function explodeBomb(squareNo) {
     message.innerHTML = `You found the bomb - with your face.  Better luck next time. bombArray: ${bombArray}`
-
-
 }
 
-//add countBombs function
-// look at squares in front of and behid (i+1, i-1) and squares in rows above [] and below[-9-8-10] and below [+8+9+10]
+// countBombs looks at squares in front of and behid (i+1, i-1) and squares in rows above[-9-8-10] and below [+8+9+10]. It adds the number of bombs a square touches to its' innerHTML.  Calls edgeLeft and EdgeRight
 function countBombs(squareNo) {
     let base = squareNo
     let bombTouchCount = 0
     //edgecase groups
     let edgeCaseLeft = [0, 9, 18, 27, 36, 45, 54, 63, 72,]
     let edgeCaseRight = [8, 17, 26, 35, 44, 53, 62, 71, 80]
-
-    //edge piece exception code - return if hit, don't progress to regular
+    //edge piece exception code - if it is an edgecase, it doesn't count the number before it(right) or after it (left). 
+    //calls edgeLeft
     edgeCaseLeft.forEach(caseLeft => {
         if (caseLeft === squareNo) {
             edgeLeft(squareNo, bombTouchCount, base)
             return
         }
     })
+    //calls edgeRight
     edgeCaseRight.forEach(caseRight => {
         if (caseRight === squareNo) {
             edgeRight(squareNo, bombTouchCount, base)
             return
         }
     })
-    //regular piece calculations
+    //regular piece calculations - verifies if it edgecase is false, if so, it looks at squares in front of and behid (i+1, i-1) and squares in rows above [] and below[-9-8-10] and below [+8+9+10]
     if (isEdge === false) {
         if (gameMap[base - 1] === "bomb") {
             bombTouchCount++
@@ -124,18 +121,24 @@ function countBombs(squareNo) {
     }
 }
 
-
-
+//changes color of squares that touch no bombs
 function safe(squareNo) {
     squares[squareNo].style.backgroundColor = "lightgreen"
 }
 
 
 //add endGame function
+function gameOver(){
 
-//add win function
+}
 
-//add reset button
+//win function - prints message, calls gameOver
+function win() {
+    message.innerHTML = "You win, no more bugs in the code!"
+    gameOver()
+}
+
+//clears board of all changes to state made durring the game
 function clearBoard() { 
     squares.forEach(square => {
         //refresh IDs
@@ -147,15 +150,11 @@ function clearBoard() {
         //remove messages
         message.innerHTML = ""
         messageTwo.innerHTML = ""
-
-
-
-
     })
 
 }
+//called in countBombs, counts bombs touched [bomb -8,-9,+1+,9,+10]
 function edgeLeft(squareNo, bombTouchCount, base) {
-
     if (gameMap[base - 9] === "bomb") {
         bombTouchCount++
     }
@@ -179,6 +178,7 @@ function edgeLeft(squareNo, bombTouchCount, base) {
     return
 }
 
+//called in countBombs, counts bombs touched [bomb -10,-9,+1,+9,+8]
 function edgeRight(squareNo, bombTouchCount, base) {
     if (gameMap[base - 10] === "bomb") {
         bombTouchCount++
@@ -202,16 +202,3 @@ function edgeRight(squareNo, bombTouchCount, base) {
     isEdge = true
     return
 }
-
-
-
-
-// -MVP
-// -beginner size grid (9x9) with 10 mines - Is starter template
-// -square on click is empty, a mine, or contains the number of mines the square touches
-// -squares with mines end game
-// - reset button
-
-//stretch
-//add board size function
-//add blankExplode function
