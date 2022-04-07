@@ -24,7 +24,7 @@ User Story:
      -beginner size grid (9x9) with 10 mines 
      -square on click is empty, a mine, or   contains the number of mines the square touches
     Incomplete
-     -account for edge piece mine count differences
+     -account for edge piece bomb count differences(mostly fixed, top row seems glitchy, can't pin it down. work on this near end)
      -squares with mines end game
      -reset button
 

@@ -47,8 +47,8 @@ function setGame() {
 //add onclick to buttons
 squares.forEach(square => {
     square.addEventListener('click', () => {
+        isEdge = false
         if (square.id === "bomb") {
-
             explodeBomb(gameMap[square.dataset.number])
         } else {
             countBombs(gameMap[square.dataset.number])
@@ -60,7 +60,7 @@ squares.forEach(square => {
 //add explode function
 //https://cdn.vectorstock.com/i/1000x1000/19/14/bomb-vector-15001914.webp
 function explodeBomb(squareNo) {
-    message.innerHTML = "You found the bomb - with your face.  Better luck next time"
+    message.innerHTML = `You found the bomb - with your face.  Better luck next time. bombArray: ${bombArray}`
 
 
 }
