@@ -33,10 +33,10 @@ squares.forEach(square => {
     })
 })
 //reset button calls setGame
-reset.addEventListener("click", function() {
+reset.addEventListener("click", function () {
     setGame()
 })
-
+//setGame original call, sets new game on page load/refresh
 setGame()
 
 //setGame sets up new game, calls clearBoard
@@ -57,6 +57,12 @@ function setGame() {
     //log bomb array and gameMap for debugging
     console.log(`bomb array ' ${bombArray}`)
     console.log(gameMap)
+}
+
+//changes color of squares that touch no bombs, calles explodingSafe
+function safe(squareNo) {
+    squares[squareNo].style.backgroundColor = "lightgreen"
+    explodingSafe()
 }
 
 // countBombs looks at squares in front of and behid (i+1, i-1) and squares in rows above[-9-8-10] and below [+8+9+10]. It adds the number of bombs a square touches to its' innerHTML.  Calls edgeLeft and EdgeRight
@@ -116,49 +122,6 @@ function countBombs(squareNo) {
     isWin()
 }
 
-//changes color of squares that touch no bombs
-function safe(squareNo) {
-    squares[squareNo].style.backgroundColor = "lightgreen"
-}
-
-//add endGame function
-function gameOver(){
-    messageTwo.innerHTML =  "Game Over. To play again, hit Reset!"
-    squares.forEach(square => {
-       square.disabled = true
-    })    
-}
-
-//sets message innerHTML to explode message, calls endGame function
-function explodeBomb(squareNo) {
-    message.innerHTML = `You found the bomb - with your face.  Better luck next time. bombArray: ${bombArray}`
-    gameOver()
-}
-
-//win function - prints message, calls gameOver
-function win() {
-    message.innerHTML = "You win, no more bugs in the code!"
-    gameOver()
-}
-
-//clears board of all changes to state made durring the game
-function clearBoard() { 
-    squares.forEach(square => {
-        //refresh IDs
-        square.id = 0
-        //reset css colors
-        square.style.backgroundColor = "grey"
-        //remove innerHTML
-        square.innerHTML = ""
-        //remove messages
-        message.innerHTML = ""
-        messageTwo.innerHTML = ""
-    })
-    squares.forEach(square => {
-        square.disabled = false
-     })    
-
-}
 //called in countBombs, counts bombs touched [bomb -8,-9,+1+,9,+10]
 function edgeLeft(squareNo, bombTouchCount, base) {
     if (gameMap[base - 9] === "bomb") {
@@ -209,15 +172,68 @@ function edgeRight(squareNo, bombTouchCount, base) {
     return
 }
 
+//sets message innerHTML to explode message, calls endGame function
+function explodeBomb(squareNo) {
+    message.innerHTML = `You found the bomb - with your face.  Better luck next time. bombArray: ${bombArray}`
+    gameOver()
+}
+
 //checks for win condition
 function isWin() {
     squares.forEach(square => {
-        if(square.style.backgroundColor === "lightgreen"){
-            winCount ++
+        if (square.style.backgroundColor === "lightgreen") {
+            winCount++
         }
-        if (winCount === 70){
+        if (winCount === 70) {
             win()
         }
-    }); 
+    });
     winCount = 0
+}
+
+//win function - prints message, calls gameOver
+function win() {
+    message.innerHTML = "You win, no more bugs in the code!"
+    gameOver()
+}
+
+//clears board of all changes to state made durring the game
+function clearBoard() {
+    squares.forEach(square => {
+        //refresh IDs
+        square.id = 0
+        //reset css colors
+        square.style.backgroundColor = "grey"
+        //remove innerHTML
+        square.innerHTML = ""
+        //remove messages
+        message.innerHTML = ""
+        messageTwo.innerHTML = ""
+    })
+    squares.forEach(square => {
+        square.disabled = false
+    })
+
+}
+
+//prints message, disables buttons
+function gameOver() {
+    messageTwo.innerHTML = "Game Over. To play again, hit Reset!"
+    squares.forEach(square => {
+        square.disabled = true
+    })
+}
+
+
+
+
+//creates a ripple effect reveiling all touching squares that are safe and have no bomb touches
+function explodingSafe() {
+    //put in a for each loop containing all touching squares
+    if (square.style.backgroundColor == "lightgreen" && square.innerHTML === "") { }
+}
+
+//calculates which squares to check for touching and wether it is an edge pice or not
+function touchSquares() {
+
 }
