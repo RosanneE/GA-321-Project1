@@ -3,6 +3,7 @@
 //global variables
 let squareCount = 0
 let squareFill = 0
+let winCount = 0
 let isEdge = false
 let bombArray = []
 let squares = document.querySelectorAll(".square")
@@ -111,6 +112,8 @@ function countBombs(squareNo) {
             squares[squareNo].innerHTML = bombTouchCount
         }
     }
+    //checks for win status
+    isWin()
 }
 
 //changes color of squares that touch no bombs
@@ -204,4 +207,17 @@ function edgeRight(squareNo, bombTouchCount, base) {
     }
     isEdge = true
     return
+}
+
+//checks for win condition
+function isWin() {
+    squares.forEach(square => {
+        if(square.style.backgroundColor === "lightgreen"){
+            winCount ++
+        }
+        if (winCount === 70){
+            win()
+        }
+    }); 
+    winCount = 0
 }
