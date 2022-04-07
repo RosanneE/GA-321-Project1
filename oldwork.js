@@ -1,3 +1,7 @@
+///Prior to disable edits
+
+
+
 // *** means ideas to work on/improve if I have time
 
 //global variables
@@ -121,9 +125,7 @@ function safe(squareNo) {
 //add endGame function
 function gameOver(){
     messageTwo.innerHTML =  "Game Over. To play again, hit Reset!"
-    squares.forEach(square => {
-       square.disabled = true
-    })    
+    
 }
 
 //sets message innerHTML to explode message, calls endGame function
@@ -151,9 +153,6 @@ function clearBoard() {
         message.innerHTML = ""
         messageTwo.innerHTML = ""
     })
-    squares.forEach(square => {
-        square.disabled = false
-     })    
 
 }
 //called in countBombs, counts bombs touched [bomb -8,-9,+1+,9,+10]
