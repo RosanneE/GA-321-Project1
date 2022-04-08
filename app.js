@@ -230,7 +230,7 @@ function gameOver() {
 //creates a ripple effect reveiling all touching squares that are safe and have no bomb touches
 function explodingSafe() {
     //put in a for each loop containing all touching squares
-    if (square.style.backgroundColor == "lightgreen" && square.innerHTML === "") { }
+    // if (square.style.backgroundColor == "lightgreen" && square.innerHTML === "") { }
 }
 
 //calculates which squares to check for touching and wether it is an edge pice or not
