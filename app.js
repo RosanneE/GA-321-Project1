@@ -36,12 +36,16 @@ squares.forEach(square => {
             explodeBomb(square)
             //(gameMap[square.dataset.number])
         } else {
+            // safe(square)
+            // countBombs(square)
             safe(gameMap[square.dataset.number],square)
             countBombs(gameMap[square.dataset.number])
-                    if (bombTouchCount != 0) {
-            square.style.color = "purple"
-            square.innerHTML = bombTouchCount
-        }
+                if (bombTouchCount != 0) {
+                    square.style.color = "purple"
+                    square.innerHTML = bombTouchCount
+                }else if (bombTouchCount === 0){
+                    explodingSafe(square.dataset.number)
+                }
         }
     })
 })
@@ -69,14 +73,7 @@ function setGame() {
         squares[bombArray[i]].id = "bomb"
     }
     // fill in Game map with touches
-    gameMap.forEach(slot => {
-        let i = 0
-        if (gameMap[bombArray[i]] != "bomb"){
-            slot = touchSquares(squares[i])
-            console.log(slot)
-        }
-        i++
-    });
+    //setMap()
     //log bomb array and gameMap for debugging
     console.log(`bomb array ' ${bombArray}`)
     console.log(gameMap)
@@ -85,8 +82,6 @@ function setGame() {
 //changes color of squares that touch no bombs, calles explodingSafe
 function safe(squareNo) {
     squares[squareNo].style.backgroundColor = "lightgreen"
-    //explodingSafe(squareNo)
-    //explodingSafe(squareNo)
 }
 
 // countBombs looks at squares in front of and behid (i+1, i-1) and squares in rows above[-9-8-10] and below [+8+9+10]. It adds the number of bombs a square touches to its' innerHTML.  Calls edgeLeft and EdgeRight
@@ -243,27 +238,60 @@ function gameOver() {
     //     square.disabled = true
     // })
 }
-function explodingSafe(squareNo) {
-
-}
-//creates a ripple effect reveiling all touching squares that are safe and have no bomb touches
 // function explodingSafe(squareNo) {
-//     caseCheck.forEach(touches => {  
-//         checkNext = squareNo + touches 
-//         if (checkNext < gameMap.length){
-//         countBombs(checkNext)
-//      if (squares[checkNext].id != "bomb" && bombTouchCount === 0){
-//             safe(checkNext)
-//             console.log(squares[checkNext])
+
+// }
+//creates a ripple effect reveiling all touching squares that are safe and have no bomb touches
+function explodingSafe(squareNo) {
+    //check all squares touching the current safe square to see if they are also safe
+    caseCheck.forEach(touches => {  
+        checkNext = parseInt(squareNo) + touches 
+        console.log(checkNext)
+        //check that the square exists on the game map
+        if (checkNext < gameMap.length && checkNext > 0){
+            countBombs(checkNext)
+            //for non edge cases
+            if(isEdge === false){
+            console.log(bombTouchCount)
+            //revel square if it has no touchCount and is not a bomb
+                if (squares[checkNext].id != "bomb" && bombTouchCount === 0){
+                    safe(checkNext)
+                    //explodingSafe(checkNext)
+                    //console.log(squares[checkNext])
+                }
+            } else {
+                //check Right edge
+                console.log(isEdge)
+                //check Left edge
+            }
+        }
+    });
+        //itterate through checkCase and make it specific to the current square 
+} 
+
+//sets map state at game start
+// function setMap(){
+//     gameMap.forEach(slot => {  
+//         let i = 0
+//         if (gameMap[i] != "bomb"){
+//             console.log("inside")
+//             countBombs(i)
+//             slot = bombTouchCount
+//             console.log(bombTouchCount)
+//             i++
 //         }
-//     }
+//         i++
 //     });
-//         //itterate through checkCase and make it specific to the current square 
-// } 
+// }
 
 
 //calculates which squares to check for touching and wether it is an edge pice or not
 function touchSquares() {
+
+}
+
+//add flags
+function addFlag(squareNo){
 
 }
 
