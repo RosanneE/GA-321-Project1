@@ -14,8 +14,8 @@ let bombArray = []
 let edgeCaseLeft = [0, 9, 18, 27, 36, 45, 54, 63, 72,]
 let edgeCaseRight = [8, 17, 26, 35, 44, 53, 62, 71, 80]
 let caseCheck = [-1,1,-10,10,-9,9,-8,8]
-let caseCheckRight = []
-let caseCheckLeft = []
+let caseCheckRight = [-10,-9,-1,8,9]
+let caseCheckLeft = [-9,-8,1,9,10]
 let squares = document.querySelectorAll(".square")
 let grid = document.getElementById("gridID")
 let message = document.querySelector(".message")
@@ -39,6 +39,7 @@ function buttonsOn() {
     squares.forEach(square => {
         square.addEventListener('click', () => {
             isEdge = false
+            //starts game timer on first click
             if (timeStatus === false) {
                 let timeNow = 0
                 const timeInterval = setInterval(function () {
@@ -295,6 +296,19 @@ function explodingSafe(squareNo) {
         if (caseLeft == squareNo) {
             whichEdge = "left"
             console.log(whichEdge)
+            for (let i = 0; i < caseCheckLeft.length; i++) {
+                let curr = caseCheckLeft[i] + parseInt(squareNo)
+                if (gameMap[curr] != "bomb") {
+                    safe(curr)
+                    countBombs(curr)
+                    if (bombTouchCount != 0) {
+                        squares[curr].style.color = "purple"
+                        squares[curr].innerHTML = bombTouchCount
+                    } else if (bombTouchCount === 0) {
+                        explodingSafe(curr)
+                    }
+                }
+            }
             return
         }
     })
@@ -302,6 +316,19 @@ function explodingSafe(squareNo) {
         if (caseRight == squareNo) {
             whichEdge = "right"
             console.log(whichEdge)
+            for (let i = 0; i < caseCheckRight.length; i++) {
+                let curr = caseCheckRight[i] + parseInt(squareNo)
+                if (gameMap[curr] != "bomb") {
+                    safe(curr)
+                    countBombs(curr)
+                    if (bombTouchCount != 0) {
+                        squares[curr].style.color = "purple"
+                        squares[curr].innerHTML = bombTouchCount
+                    } else if (bombTouchCount === 0) {
+                        explodingSafe(curr)
+                    }
+                }
+            }
             return
         }
     })
@@ -320,5 +347,11 @@ function explodingSafe(squareNo) {
                 }
             }
         }
+    } else if (whichEdge === "left"){
+
+    }else if (whichEdge === "right"){
+
+    }else {
+        console.log("something is wrong with cascading Edge Cases")
     }
 }
