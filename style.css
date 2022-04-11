@@ -56,7 +56,7 @@ li {
     font-size:x-large  ;
     margin: 10px;
     height:50px;
-    width: 450px;
+    width: 320px;
 }
 .setFlag{
     display: flex;
@@ -92,6 +92,14 @@ li {
     vertical-align: center;
 }
 .level{
+    height: 50px;
+    width: 100px;
+    color: purple;
+    background-color: lightgreen;
+    display: flex;
+    align-content: space-around;
+}
+.timer{
     height: 50px;
     width: 100px;
     color: purple;

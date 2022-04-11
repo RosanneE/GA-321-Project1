@@ -8,6 +8,7 @@ let bombTouchCount = 0
 let width = 8
 let isEdge = false
 let flag = false
+let timeStatus = false
 let bombArray = []
     //edgecase groups
 let edgeCaseLeft = [0, 9, 18, 27, 36, 45, 54, 63, 72,]
@@ -22,6 +23,8 @@ let messageTwo = document.querySelector(".messageTwo")
 let reset = document.querySelector(".reset")
 let setFlag = document.querySelector("#flagID")
 let level = document.querySelectorAll("level")
+let timer = document.getElementById("timerID")
+console.log(timer)
 //***Might not need? Only for Debugging?
 let gameMap = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,]
 
@@ -36,11 +39,19 @@ function buttonsOn() {
     squares.forEach(square => {
         square.addEventListener('click', () => {
             isEdge = false
+            if (timeStatus === false) {
+                let timeNow = 0
+                const timeInterval = setInterval(function () {
+                    timeNow++
+                    timer.innerHTML = `Timer: ${timeNow}`
+                }, 1000)
+                timeStatus = true
+            }
             if (flag === false) {
                 if (square.id === "bomb") {
                     explodeBomb(square)
                     //(gameMap[square.dataset.number])
-                } else{
+                } else {
                     // safe(square)
                     // countBombs(square)
                     safe(gameMap[square.dataset.number], square)
@@ -103,8 +114,7 @@ function setGame() {
         squares[bombArray[i]].id = "bomb"
     }
     buttonsOn()
-    // fill in Game map with touches
-    //setMap()
+    //start timer
     //log bomb array and gameMap for debugging
     console.log(`bomb array ' ${bombArray}`)
     console.log(gameMap)
@@ -279,37 +289,36 @@ function gameOver() {
 
 // creates a ripple effect reveiling all touching squares that are safe and have no bomb touches and stops after reveling a numbered square
 function explodingSafe(squareNo) {
-    for (let i = 0; i < caseCheck.length; i++){
-        let curr = caseCheck[i] + parseInt(squareNo)
-        //console.log(curr)
-        if (gameMap[curr] != "bomb"){
-            safe(curr)
-            countBombs(curr)
-            if (bombTouchCount != 0) {
-                squares[curr].style.color = "purple"
-                squares[curr].innerHTML = bombTouchCount
-            } else if(bombTouchCount === 0){
-                explodingSafe(curr)
+    let whichEdge = "none"
+    console.log(squareNo)
+    edgeCaseLeft.forEach(caseLeft => {
+        if (caseLeft == squareNo) {
+            whichEdge = "left"
+            console.log(whichEdge)
+            return
+        }
+    })
+    edgeCaseRight.forEach(caseRight => {
+        if (caseRight == squareNo) {
+            whichEdge = "right"
+            console.log(whichEdge)
+            return
+        }
+    })
+    if (whichEdge === "none") {
+        console.log(whichEdge)
+        for (let i = 0; i < caseCheck.length; i++) {
+            let curr = caseCheck[i] + parseInt(squareNo)
+            if (gameMap[curr] != "bomb") {
+                safe(curr)
+                countBombs(curr)
+                if (bombTouchCount != 0) {
+                    squares[curr].style.color = "purple"
+                    squares[curr].innerHTML = bombTouchCount
+                } else if (bombTouchCount === 0) {
+                    //explodingSafe(curr)
+                }
             }
         }
-    } 
-} 
-
-// function explodingSafe(squareNo){
-//     countBombs(squareNo)
-//     if (bombTouchCount != 0){
-//         console.log("should not be in explodingSafe")
-//     }
-//     for (i = 0; i< caseCheck.length; i++){
-//         curr = parseInt(squareNo) + caseCheck[i]
-//         safe(curr)
-//         countBombs(curr)
-//         console.log(bombTouchCount)
-//         console.log(gameMap[curr])
-//         if (bombTouchCount === 0 && gameMap[curr] != "bomb"){
-//             curr = curr++
-//             explodingSafe(curr)
-//         }
-//     }
-// }
-
+    }
+}
