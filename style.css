@@ -85,6 +85,20 @@ li {
     background-color: purple;
     background-position: center;
 }
+.levelsOpts{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    vertical-align: center;
+}
+.level{
+    height: 50px;
+    width: 100px;
+    color: purple;
+    background-color: lightgreen;
+    display: flex;
+    align-content: space-around;
+}
 @media (max-width: 100px) {
     button{
         width: 25px;
