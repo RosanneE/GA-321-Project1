@@ -6,9 +6,8 @@ let squareFill = 0
 let winCount = 0
 let level = 0
 let bombTouchCount = 0
-let width = 8
 let isEdge = false
-let flag = false
+let setFlag = false
 let bombArray = []
     //edgecase groups
 let edgeCaseLeft = [0, 9, 18, 27, 36, 45, 54, 63, 72,]
@@ -21,7 +20,6 @@ let grid = document.getElementById("gridID")
 let message = document.querySelector(".message")
 let messageTwo = document.querySelector(".messageTwo")
 let reset = document.querySelector(".reset")
-let setFlag = document.querySelector("#flagID")
 //***Might not need? Only for Debugging?
 let gameMap = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,]
 
@@ -32,50 +30,35 @@ squares.forEach(square => {
     squareCount++
 });
 //add onclick to buttons
-function buttonsOn() {
-    squares.forEach(square => {
-        square.addEventListener('click', () => {
-            isEdge = false
-            if (flag === false) {
-                if (square.id === "bomb") {
-                    explodeBomb(square)
-                    //(gameMap[square.dataset.number])
-                } else {
-                    // safe(square)
-                    // countBombs(square)
-                    safe(gameMap[square.dataset.number], square)
-                    countBombs(gameMap[square.dataset.number])
-                    if (bombTouchCount != 0) {
-                        explodingSafe(square.dataset.number)
-                    }
+squares.forEach(square => {
+    square.addEventListener('click', () => {
+        console.log()
+        isEdge = false
+        if (square.id === "bomb") {
+            explodeBomb(square)
+            //(gameMap[square.dataset.number])
+        } else {
+            // safe(square)
+            // countBombs(square)
+            safe(gameMap[square.dataset.number],square)
+            countBombs(gameMap[square.dataset.number])
+                if (bombTouchCount != 0) {
+                    square.style.color = "purple"
+                    square.innerHTML = bombTouchCount
+                }else if (bombTouchCount === 0){
+                    //explodingSafe(square.dataset.number)
                 }
-            } else if (flag === true) {
-                square.style.backgroundColor = "purple"
-                //square.classList.add("flagOn")
-            }
-        })
+        }
     })
-}
+})
+
+//set right click event(add flag)
+
 
 //reset button calls setGame
 reset.addEventListener("click", function () {
     setGame()
 })
-
-//set flag button
-
-setFlag.addEventListener("click", function(){  
-    if (flag === false){
-        flag = true;
-        console.log("flag on")
-    }else if (flag === true){
-        flag = false;
-        console.log("flag off")
-    }else{
-        console.log("something has gone wrong in setFlag()")
-    }
-});
-
 //setGame original call, sets new game on page load/refresh
 setGame()
 
@@ -94,7 +77,6 @@ function setGame() {
         gameMap[bombArray[i]] = "bomb"
         squares[bombArray[i]].id = "bomb"
     }
-    buttonsOn()
     // fill in Game map with touches
     //setMap()
     //log bomb array and gameMap for debugging
@@ -152,10 +134,6 @@ function countBombs(squareNo) {
         if (gameMap[base - 9] === "bomb") {
             bombTouchCount++
         }
-    }
-    if (bombTouchCount != 0){
-        squares[squareNo].style.color = "purple"
-        squares[squareNo].innerHTML = bombTouchCount
     }
     //checks for win status
     isWin()
@@ -265,18 +243,36 @@ function gameOver() {
     //     square.disabled = true
     // })
 }
+// function explodingSafe(squareNo) {
 
+// }
 //creates a ripple effect reveiling all touching squares that are safe and have no bomb touches
-function explodingSafe(squareNo) {
-    for (let i = 0; i < caseCheck.length; i++){
-        let curr = caseCheck[i] + parseInt(squareNo)
-        console.log(curr)
-        if (squares[curr].id != "bomb"){
-            safe(curr)
-            countBombs(curr)
-        }
-    }
-} 
+// function explodingSafe(squareNo) {
+//     //check all squares touching the current safe square to see if they are also safe
+//     caseCheck.forEach(touches => {  
+//         checkNext = parseInt(squareNo) + touches 
+//         console.log(checkNext)
+//         //check that the square exists on the game map
+//         if (checkNext < gameMap.length && checkNext > 0){
+//             countBombs(checkNext)
+//             //for non edge cases
+//             if(isEdge === false){
+//             console.log(bombTouchCount)
+//             //revel square if it has no touchCount and is not a bomb
+//                 if (squares[checkNext].id != "bomb" && bombTouchCount === 0){
+//                     safe(checkNext)
+//                     //explodingSafe(checkNext)
+//                     //console.log(squares[checkNext])
+//                 }
+//             } else {
+//                 //check Right edge
+//                 console.log(isEdge)
+//                 //check Left edge
+//             }
+//         }
+//     });
+//         //itterate through checkCase and make it specific to the current square 
+// } 
 
 //calculates which squares to check for touching and wether it is an edge pice or not
 function touchSquares() {
@@ -287,3 +283,20 @@ function touchSquares() {
 function addFlag(squareNo){
 
 }
+
+//formats board and board properties based on level selection
+// function boardLevel (){
+//     if (level = 0){
+        
+//     }else if(level === 1 || level === 2){
+
+
+//     }else{
+//         console.log()
+//     }
+// }
+
+// function findEdges(){
+// let boardSize = gameMap.length +1
+// let edgesize = boardSize.sqrt
+// }

@@ -20,6 +20,9 @@
 <body>
     <div class=whole>
         <h1>Mine Sweeper</h1>
+        <div class = "setFlag" id = setFlagID>
+        <button class = "flag" id = "flagID">Set Flag</button>
+        </div>
         <h2 class="message" id=messageID></h2>
         <h4 class = "messageTwo" id = "messageTwoID"></h4>
         <div class="grid" id="gridID">
@@ -123,14 +126,17 @@
                 <button class="square" id="squareID"> </button>
             </div>
         </div>
+        <div class = "howTo"></div>
         <div class="resetDiv" id="resetDivID"> <button class="reset" id="resetID">Reset Game</button>
         </div>
+        
         <ul>
             <li>Begin playing by clicking any square.</li>
             <li>Some squares are bombs - click them and the game is over.</li>
             <li>Squares that touch a bomb reveal the number of bombs they touch.</li>
             <li>Squares that touch no bombs are blank</li>
         </ul>
+    </div>
     </div>
 </body>
 
