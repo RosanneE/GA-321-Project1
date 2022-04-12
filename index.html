@@ -13,22 +13,35 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <!-- <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Dosis&family=Oswald:wght@300&family=Press+Start+2P&family=Rubik+Moonrocks&display=swap" rel="stylesheet"> -->
 
-
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Dosis&family=Oswald:wght@300&family=Press+Start+2P&display=swap');
+        </style>
     <title>Document</title>
 </head>
 
 <body>
     <div class=whole>
-        <h1>Mine Sweeper</h1>
-        <div class="topButtons">
-            <div class="setFlag" id=setFlagID>
-                <button class="flag" id="flagID">Set Flag</button>
-                <div class="timerDiv"></div>
-                <p class="timer" id="timerID">Time: </p>
-            </div>
+        <h1>Bug Sweeper</h1>
+        <div class="rules">
+            <p>Your Mission:</p>
+            <ul>
+                <li>Begin playing by clicking any square.</li>
+                <li>Some squares contain Bugs - click them and the game is over.</li>
+                <li>When clicked, squares that touch Bugs reveal the number of Bugs they touch.</li>
+                <li>When clicked, squares that touch no Bugs are blank</li>
+                <li>Set Trap allows you to highlight squares you believe may contain Bugs - be careful, these squares can still be clicked on and revealed</li>
+                <li>Expose all squares EXCEPT for the 10 containing bugs to win</li>
+            </ul>
         </div>
         <h2 class="message" id=messageID></h2>
-        <h4 class = "messageTwo" id = "messageTwoID"></h4>
+        <h4 class="messageTwo" id="messageTwoID"></h4>
+        <div class="topButtons">
+            <div class="setFlag" id=setFlagID>
+                <button class="flag" id="flagID">Set Trap</button>
+                <div class="timerDiv"></div>
+                <p class="timer" id="timerID">Timer </p>
+            </div>
+        </div>
         <div class="grid" id="gridID">
             <div class="col colOne" id="colID colOneID">
                 <button class="square" id="squareID"> </button>
@@ -130,21 +143,13 @@
                 <button class="square" id="squareID"> </button>
             </div>
         </div>
-        <div class = "howTo"></div>
         <div class="resetDiv" id="resetDivID"> <button class="reset" id="resetID">Reset Game</button>
         </div>
-        <div class="levelsOpts">
-            <button class = "beginner level" id = "beginnerID">Begginer</button>
-            <button class = "intermediate level" id = "intermediateID">Intermediate</button>
-            <button class = "advanced level" id = "advancedID">Advanced</button>
-        </div>
-        <ul>
-            <li>Begin playing by clicking any square.</li>
-            <li>Some squares are bombs - click them and the game is over.</li>
-            <li>Squares that touch a bomb reveal the number of bombs they touch.</li>
-            <li>Squares that touch no bombs are blank</li>
-        </ul>
-    </div>
+        <!-- <div class="levelsOpts">
+            <button class="beginner level" id="beginnerID">Begginer</button>
+            <button class="intermediate level" id="intermediateID">Intermediate</button>
+            <button class="advanced level" id="advancedID">Advanced</button>
+        </div> -->
     </div>
 </body>
 

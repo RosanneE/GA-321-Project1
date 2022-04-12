@@ -45,18 +45,15 @@ function buttonsOn() {
         square.addEventListener('click', () => {
             isEdge = false
             //starts game timer on first click
-            if (timeStatus === false || gameIsOver == true) {
-                let timeNow = 0
-                if (timeStatus === false) {
+                if (timeStatus === false || gameIsOver ===true ) {
+                    let timeNow = 0;
                     const timeInterval = setInterval(function () {
                         timeNow = timeNow + .5
-                        timer.innerHTML = `Timer: ${timeNow}`
+                        timer.innerHTML = `${timeNow}`
                     }, 500)
-                    timeStatus = true
-                } else if (gameIsOver === true) {
-                    clearInterval(timeInterval)
-                }
-            }
+                  if (gameIsOver === true) {
+                    clearInterval(timeInterval)}   
+                  }             
             if (flag === false) {
                 if (square.id === "bomb") {
                     explodeBomb(square)
@@ -64,6 +61,7 @@ function buttonsOn() {
                 } else {
                     // safe(square)
                     // countBombs(square)
+                    timeStatus = true
                     safe(gameMap[square.dataset.number], square)
                     countBombs(gameMap[square.dataset.number])
                     console.log(`bomb count from onclick ${bombTouchCount}`)
@@ -73,7 +71,7 @@ function buttonsOn() {
                     }
                 }
             } else if (flag === true && square.style.backgroundColor !== "lightgreen") {
-                square.style.backgroundColor = "purple"
+                square.classList.add("flagOn")
                 //square.classList.add("flagOn")
             }
         })
@@ -101,37 +99,6 @@ setFlag.addEventListener("click", function () {
         console.log("something has gone wrong in setFlag()")
     }
 });
-
-// beginner.addEventListener("click", function(){
-//     //set parameters
-//     height = 9
-//     width = 9
-//     numBombs = 10
-// })
-// intermediate.addEventListener("click", function(){
-//     //set parameters
-//     height = 16
-//     width = 16
-//     numBombs = 40
-//     //add new game map slots
-//     for (i = 0; i < (175); i++){
-//         gameMap.push(0)
-//     }
-
-//     //add new squares
-// })
-// advanced.addEventListener("click", function(){
-//     //set parameters
-//     height = 16
-//     width = 30
-//     numBombs = 99
-//     //add new game map slots
-//     for (i = 0; i < (399); i++){
-//         gameMap.push(0)
-//     }
-//     //add new squares
-
-// })
 
 //setGame original call, sets new game on page load/refresh
 setGame()
@@ -161,7 +128,8 @@ function setGame() {
 //changes color of squares that touch no bombs, calles cascadingSafe
 function safe(squareNo) {
     if (squares[squareNo] != null) {
-        squares[squareNo].style.backgroundColor = "lightgreen"
+        //squares[squareNo].style.backgroundColor = "lightgreen"
+        squares[squareNo].classList.add("safe")
     }
 }
 
@@ -216,7 +184,7 @@ function countBombs(squareNo) {
         console.log(`bomb count from countBombs ${bombTouchCount}`)
         console.log(squares[squareCount])
         if (squares[squareCount] !== null) {
-            squares[squareNo].style.color = "purple"
+            squares[squareNo].style.color = "white"
             squares[squareNo].innerHTML = bombTouchCount
         }
     }
@@ -243,7 +211,7 @@ function edgeLeft(squareNo) {
         bombTouchCount++
     }
     if (bombTouchCount !== 0) {
-        squares[squareNo].style.color = "purple"
+        squares[squareNo].style.color = "white"
         squares[squareNo].innerHTML = bombTouchCount
     }
     isEdge = true
@@ -268,7 +236,7 @@ function edgeRight(squareNo) {
         bombTouchCount++
     }
     if (bombTouchCount !== 0) {
-        squares[squareNo].style.color = "purple"
+        squares[squareNo].style.color = "white"
         squares[squareNo].innerHTML = bombTouchCount
     }
     isEdge = true
@@ -278,7 +246,7 @@ function edgeRight(squareNo) {
 //sets message innerHTML to explode message, calls endGame function
 function explodeBomb(squareNo) {
     // console.log(squareNo)
-    message.innerHTML = `You found the bomb - with your face.  Better luck next time.`// bombArray: ${bombArray}`
+    message.innerHTML = `The bug has spawned, You have been overwhelmed!  Better luck next time.`// bombArray: ${bombArray}`
     squareNo.classList.add("bombHit")
     gameOver()
 }
@@ -400,7 +368,7 @@ function checkAround(currSquare) {
         safe(currSquare)
         countBombs(currSquare)
         if (bombTouchCount !== 0) {
-            squares[currSquare].style.color = "purple"
+            squares[currSquare].style.color = "white"
             squares[currSquare].innerHTML = bombTouchCount
         } else if (bombTouchCount === 0) {
             curr = currSquare + 1
@@ -408,3 +376,34 @@ function checkAround(currSquare) {
         }
     }
 }
+
+// beginner.addEventListener("click", function(){
+//     //set parameters
+//     height = 9
+//     width = 9
+//     numBombs = 10
+// })
+// intermediate.addEventListener("click", function(){
+//     //set parameters
+//     height = 16
+//     width = 16
+//     numBombs = 40
+//     //add new game map slots
+//     for (i = 0; i < (175); i++){
+//         gameMap.push(0)
+//     }
+
+//     //add new squares
+// })
+// advanced.addEventListener("click", function(){
+//     //set parameters
+//     height = 16
+//     width = 30
+//     numBombs = 99
+//     //add new game map slots
+//     for (i = 0; i < (399); i++){
+//         gameMap.push(0)
+//     }
+//     //add new squares
+
+// })
