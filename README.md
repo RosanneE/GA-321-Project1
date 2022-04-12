@@ -1,26 +1,18 @@
 # GA-321-Project1
 
-Minesweeper Game
+Bug Sweeper
+A game played in the classic Style of Minesweeper!
 
-
-Current Status:
-
-Completed:
-    -Wire frame
-
-
-Goals:
-    -create user story (goes on website - written version goes in read-me)
-    -use figma to create wire frame (what it looks like) (include in ReadMe)
-
-User Story:
-    Users begin playing by clicking any square.
-    Some squares are bombs - click them and the game is over.
-    Clicking Squares that touch a bomb will reveal the number of bombs they touch.
-    Clicking Squares that touch no bombs are blanks, and will change color
+User Story                
+    Begin playing by clicking any square.
+    Some squares contain Bugs - click them and the game is over.
+    When clicked, squares that touch Bugs reveal the number of Bugs they touch.
+    When clicked, squares that touch no Bugs are blank
+    Expose all squares EXCEPT for the 10 containing bugs to win
+    Set Trap allows you to highlight squares you believe may contain Bugs - be careful, these squares can still be clicked on and revealed
+    Turn Cascade on to revel blank squares more quickly. Make sure to click inside all edges of the revealed area to show the number of bugs touched by those squares
 
  -MVP
-    Completed
      -beginner size grid (9x9) with 10 mines 
      -square on click is empty, a mine, or   contains the number of mines the square touches
     Incomplete
@@ -28,16 +20,19 @@ User Story:
      -squares with mines end game
      -reset button
 
+
  Stretch features:    
-   Incomplete
-    -Three grid sizes/levels to choose between
-    -beginner size grid (9x9) with 10 mines
-    -intermediate size grid (16x16) with 40 mines
-    -advanced (30x16) with 99 mines
-    -Time clock (starts on first click)
-    -empty square explosion (clicking an empty square reveals all touching empty squares)
-    -as squares are reveled form a picture
-    -top score logger
-    -set possible bomb squares to flags
-    -make it pretty
+    Complete
+         -falg postential bomb squares
+         -CSS/design user interface
+    In Progress
+         -empty square explosion (clicking an empty square reveals all touching empty squares)
+         STATUS: togles off and on, still a bit glitchy
+    To Do
+        -Three grid sizes/levels to choose between
+            -beginner size grid (9x9) with 10 mines
+            -intermediate size grid (16x16) with 40 mines
+            -advanced (30x16) with 99 mines
+        -Time clock (starts on first click)
+        -Top score logger
 

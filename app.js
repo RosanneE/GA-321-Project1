@@ -66,8 +66,9 @@ function buttonsOn() {
 reset.addEventListener("click", function () {
     setGame()
 })
+
+//togles cascade function on and off
 cascade[0].addEventListener("click", function () {
-    
     if (cascadeOff === false) {
         cascadeOff = true
         cascade[0].style.backgroundColor = "#00ff41"
@@ -79,7 +80,6 @@ cascade[0].addEventListener("click", function () {
         cascade[0].style.color = "#00ff41"
         cascade[0].innerHTML = "Cascade Off"
     } 
-
 })
 
 //set flag button toggle flag ability. Chnges color and text to alert to on
@@ -179,7 +179,6 @@ function countBombs(squareNo) {
         }
     }
     if (bombTouchCount !== 0) {
-        //console.log(squares[squareNo])
         if (squares[squareNo]  !== undefined) {
             squares[squareNo].innerHTML = bombTouchCount        
         }
@@ -240,7 +239,7 @@ function edgeRight(squareNo) {
 //sets message innerHTML to explode message, calls endGame function
 function explodeBomb(squareNo) {
     // console.log(squareNo)
-    message.innerHTML = `The bug has spawned, You have been overwhelmed!  Better luck next time.`// bombArray: ${bombArray}`
+    message.innerHTML = `The bug has spawned, You have been overwhelmed!  Better luck next time.`
     squareNo.classList.add("bombHit")
     gameOver()
 }
@@ -270,7 +269,7 @@ function clearBoard() {
         //refresh IDs
         square.id = 0
         //reset css colors
-        square.style.backgroundColor = "grey"
+        square.style.backgroundColor = "gray"
         //remove innerHTML
         square.innerHTML = ""
         //remove images/image classes
