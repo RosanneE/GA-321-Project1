@@ -11,11 +11,9 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Dosis&family=Oswald:wght@300&family=Press+Start+2P&family=Rubik+Moonrocks&display=swap" rel="stylesheet"> -->
-
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Dosis&family=Oswald:wght@300&family=Press+Start+2P&display=swap');
-        </style>
+    </style>
     <title>Document</title>
 </head>
 
@@ -29,8 +27,9 @@
                 <li>Some squares contain Bugs - click them and the game is over.</li>
                 <li>When clicked, squares that touch Bugs reveal the number of Bugs they touch.</li>
                 <li>When clicked, squares that touch no Bugs are blank</li>
-                <li>Set Trap allows you to highlight squares you believe may contain Bugs - be careful, these squares can still be clicked on and revealed</li>
                 <li>Expose all squares EXCEPT for the 10 containing bugs to win</li>
+                <li>Set Trap allows you to highlight squares you believe may contain Bugs - be careful, these squares can still be clicked on and revealed</li>
+                <li>Turn Cascade on to revel blank squares more quickly. Make sure to click inside all edges of the revealed area to show the number of bugs touched by those squares</li>
             </ul>
         </div>
         <h2 class="message" id=messageID></h2>
@@ -39,7 +38,7 @@
             <div class="setFlag" id=setFlagID>
                 <button class="flag" id="flagID">Set Trap</button>
                 <div class="timerDiv"></div>
-                <p class="timer" id="timerID">Timer </p>
+                <button class="cascade" id="casecadeID">Cascade Off</button>
             </div>
         </div>
         <div class="grid" id="gridID">
@@ -145,12 +144,6 @@
         </div>
         <div class="resetDiv" id="resetDivID"> <button class="reset" id="resetID">Reset Game</button>
         </div>
-        <!-- <div class="levelsOpts">
-            <button class="beginner level" id="beginnerID">Begginer</button>
-            <button class="intermediate level" id="intermediateID">Intermediate</button>
-            <button class="advanced level" id="advancedID">Advanced</button>
-        </div> -->
     </div>
 </body>
-
 </html>

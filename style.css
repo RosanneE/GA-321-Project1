@@ -1,9 +1,12 @@
 .whole{
     margin:15px;
     font-family: 'Audiowide', cursive;
+    color: #00ff41;
+    background-color: black;
 }
 h1 {
     text-align: center;
+    text-shadow: 2px black;
 }
 h2 {
     margin: auto;
@@ -29,12 +32,12 @@ li {
     width: 450px;
 }
 .flag{
-    color: lightgreen;
-    background-color: purple;
+    color: black;
+    background-color: gray;
     font-size:x-large  ;
     margin: 5px;
     height:50px;
-    width: 320px;
+    width: 220px;
 }
 .setFlag{
     font-size: x-large;
@@ -46,17 +49,18 @@ li {
     background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSndcxTg8oZe3KJhUo_UiIxFGvkWMC4SeStTmseoYERnGw2Gwv5UA5qVwxTHtZy4ZPgme0&usqp=CAU");
     background-size: 50px;
 }
-.timer{
+.cascade{
     height: 50px;
-    width: 120px;
+    width: 220px;
     margin: 5px;
-    color: purple;
-    background-color: lightgreen;
+    color: black;
+    background-color: gray;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 button {
+    color: white;
     font-size: 50px;
     vertical-align: center;
     border: 1px solid black;
@@ -85,12 +89,12 @@ button {
     background-size: 80px;
     font-size:xx-large
 }.flagOn{
-    background-color: purple;
+    background-color: black;
     background-position: center;
 }
 .reset{
-    background-color: lightgreen;
-    color:purple;
+    background-color: #00ff41;
+    color:black;
     font-size:x-large  ;
     margin: 10px;
     height:50px;
@@ -111,15 +115,6 @@ button {
     align-items: center;
     vertical-align: center; */
 
-}
-.level{
-    height: 50px;
-    width: 130px;
-    color: purple;
-    background-color: lightgreen;
-    display: inline;
-    margin: 8px;
-    
 }
 @media (max-width: 100px) {
     button{
