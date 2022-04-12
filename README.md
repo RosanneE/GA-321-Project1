@@ -1,7 +1,15 @@
 # GA-321-Project1
 
 Bug Sweeper
-A game played in the classic Style of Minesweeper!
+A game played in the classic Style of Minesweeper!!
+
+See screenshots for examples of game play:
+
+
+![Screen Shot 2022-04-12 at 3 03 20 PM](https://user-images.githubusercontent.com/6979738/163072657-75082f04-59da-4fb3-ab09-20865e5802f3.png)
+![Screen Shot 2022-04-12 at 3 19 13 PM](https://user-images.githubusercontent.com/6979738/163072783-e67ab9b7-c435-4e2e-af51-0540ddcda679.png)
+
+
 
 User Story                
     Begin playing by clicking any square.
